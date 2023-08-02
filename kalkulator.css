@@ -1,0 +1,57 @@
+body {
+background: rgb(157, 242, 158);
+}
+
+.platform {
+    background-image: url(./steel.jpg);
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    height: 500px;
+    border: 4px solid;
+    margin: 100px 0px 0px 100px;
+}
+
+.show-result {
+    width: 317px;
+    height: 60px;
+    border: 4mm ridge;
+    background: #ffac9d;
+    color: rgb(1, 23, 89);
+    text-align: right;
+    font-size: 55px;
+}
+
+
+.reset {
+    background: rgb(171, 142, 142);
+    width: 90%;
+    height: 50px;
+    border: 3px solid;
+    text-align: center;
+    font-size: 40px;
+    margin: 10px 0px 5px 16px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-around
+}
+
+.number-buttons, .btnPlus, .btnMinus, .btnMiltiply, .btnFraction, .btnResult, .btnDivision {
+    background-image: url(./button.jpg);
+    width: 70px;
+    height: 70px;
+    border-radius: 35%;
+    border: 3px solid;
+    text-align: center;
+    font-size: 60px;
+    margin: 10px 0px 0px 0px;
+
+}
+
+
+div > p
+div p
+div:hover
+
