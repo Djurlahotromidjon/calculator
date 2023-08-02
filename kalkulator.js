@@ -41,7 +41,7 @@ function blinkNumber() {
 
 const plusOperator = '+'
 const minusOperator = '-'
-const miltipleOperator = '*'
+const multipleOperator = '*'
 const divisionOperator = '/'
 
 
@@ -72,33 +72,33 @@ function onMinusButton() {
 
 $minusButton.addEventListener('click', onMinusButton)
 
-function onMiltiplyButton() {
+function onMultiplyButton() {
     valueAfterUseOperator = Number($result.value)
-    actualOperator = miltipleOperator
+    actualOperator = multipleOperator
     isFirstTypingAfterUseOperator = true
     blinkNumber()
 }
 
-$multiplyButton.addEventListener('click', onMiltiplyButton)
+$multiplyButton.addEventListener('click', onMultiplyButton)
 
-function onDivisiomButton() {
+function onDivisionButton() {
     valueAfterUseOperator = Number($result.value)
     actualOperator = divisionOperator
     isFirstTypingAfterUseOperator = true
     blinkNumber()
 }
 
-$divisionButton.addEventListener('click', onDivisiomButton)
+$divisionButton.addEventListener('click', onDivisionButton)
 
 
 function onCalculate() {
-    if (actualOperator == '+') {
+    if (actualOperator === '+') {
         $result.value = valueAfterUseOperator + Number($result.value)
-    } else if (actualOperator == '-') {
+    } else if (actualOperator === '-') {
         $result.value = valueAfterUseOperator - Number($result.value)
-    } else if (actualOperator == '*') {
+    } else if (actualOperator === '*') {
         $result.value = valueAfterUseOperator * Number($result.value)
-    } else if (actualOperator == '/') {
+    } else if (actualOperator === '/') {
         $result.value = valueAfterUseOperator / Number($result.value)
     }
 
