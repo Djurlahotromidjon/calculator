@@ -39,51 +39,43 @@ const Operator = {
 }
 
 
-
 let valueAfterUseOperator = null
 let actualOperator = null
 
 let isFirstTypingAfterUseOperator = false
-let nextOperator = false
-
 
 
 
 
 function blinkNumber() {
-    let value = $result.value
-    $result.value = ''
+    let value = $result.textContent
+    $result.textContent = ''
 
     setTimeout(() => {
-        $result.value = value
+        $result.textContent = value
     }, 70)
 }
 
 
 
-
 function operatorHandler(operator) {
-    valueAfterUseOperator = Number($result.value)
+    valueAfterUseOperator = Number($result.textContent)
     actualOperator = operator
     isFirstTypingAfterUseOperator = true
     blinkNumber()
 }
 
 function onPlusButton() {
-    nextOperator = true
     operatorHandler(Operator.plus)
 }
-
 
 function onMinusButton() {
     operatorHandler(Operator.minus)
 }
 
-
 function onMultiplyButton() {
     operatorHandler(Operator.multiple)
 }
-
 
 function onDivisionButton() {
     operatorHandler(Operator.division)
@@ -95,15 +87,15 @@ function onCalculate() {
     let result
     
     if (actualOperator === Operator.plus) {
-        result = valueAfterUseOperator + Number($result.value)
+        result = valueAfterUseOperator + Number($result.textContent)
     } else if (actualOperator === Operator.minus) {
-        result = valueAfterUseOperator - Number($result.value)
+        result = valueAfterUseOperator - Number($result.textContent)
     } else if (actualOperator === Operator.multiple) {
-        result = valueAfterUseOperator * Number($result.value)
+        result = valueAfterUseOperator * Number($result.textContent)
     } else if (actualOperator === Operator.division) {
-        result = valueAfterUseOperator / Number($result.value)
+        result = valueAfterUseOperator / Number($result.textContent)
     }
-    
+
     onTypingNumber(result)
 
     blinkNumber()
@@ -112,50 +104,29 @@ function onCalculate() {
 }
 
 
-
+//функция для вывода цифр на дисплей
 function onTypingNumber(number) { 
     
     if (isFirstTypingAfterUseOperator) {
         isFirstTypingAfterUseOperator = false
-        $result.value = number
+        $result.textContent = number
         return
     }
     
-    let oldValue = $result.value + number
-    $result.value = Number(oldValue)
+    let oldValue = $result.textContent + number
+    $result.textContent = oldValue
 }
 
 
 
 function onShowReset() { 
-    $result.value = '0'
+    $result.textContent = '0'
     blinkNumber()
 }
 
 
-// функция отсортировки нежеланных символов (str) меняется на value
-function delNotCorrectValue(str) {
-    
-    let result = ''
 
-    for (let i = 0; i < str.length; i++) {
-  
-        if (str[i] < Infinity) {
-            result += str[i]
-        }  
-    }
-    return result
-}
-
-
-// функция вывода на дисплей
-function onChangeInput() {
-    const value = $result.value
-    onTypingNumber(delNotCorrectValue(value))
-}
-
-
-// TODO: убрать баг
+// TODO: добавить фич
 
 
 
@@ -177,4 +148,4 @@ buttonsArray[zeroNumberButtonIndex].addEventListener('click', function() {onTypi
 
 
 $reset.addEventListener('click', onShowReset)
-$result.addEventListener('input', onChangeInput)
+
