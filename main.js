@@ -114,7 +114,7 @@ function onTypingNumber(number) {
     }
     
     let oldValue = $result.textContent + number
-    $result.textContent = oldValue
+    $result.textContent = Number(oldValue)
 }
 
 
