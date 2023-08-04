@@ -53,7 +53,7 @@ function blinkNumber() {
 
     setTimeout(() => {
         $result.textContent = value
-    }, 70)
+    }, 80)
 }
 
 
@@ -82,7 +82,6 @@ function onDivisionButton() {
 }
 
 
-
 function onCalculate() {
     let result
     
@@ -96,7 +95,7 @@ function onCalculate() {
         result = valueAfterUseOperator / Number($result.textContent)
     }
 
-    onTypingNumber(result)
+    $result.textContent = result
 
     blinkNumber()
     actualOperator = null
@@ -109,9 +108,11 @@ function onTypingNumber(number) {
     
     if (isFirstTypingAfterUseOperator) {
         isFirstTypingAfterUseOperator = false
+        proba = true
         $result.textContent = number
         return
     }
+
     
     let oldValue = $result.textContent + number
     $result.textContent = Number(oldValue)
