@@ -80,7 +80,7 @@ function operatorHandler(operator) {
         blinkNumber()
     }
 }
-
+//прпр
 function onPlusButton() {
     operatorHandler(Operator.plus)
 }
