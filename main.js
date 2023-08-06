@@ -61,26 +61,21 @@ const Operator = {
 
 
 function operatorHandler(operator) {
-    if (!nextOperator) {
-        valueAfterUseOperator = Number($result.textContent)
-        actualOperator = operator
-        isFirstTypingAfterUseOperator = true
+    if (nextOperator) {
+        onCalculate(null, true)
+    } else {
         nextOperator = true
-        dubleOnCalculate = false
-        nextOnTypingFraction = false
-        blinkNumber()
     }
-    else {
-        onNextOperatorResult()
-        valueAfterUseOperator = Number($result.textContent)
-        actualOperator = operator
-        isFirstTypingAfterUseOperator = true
-        dubleOnCalculate = false
-        nextOnTypingFraction = false
-        blinkNumber()
-    }
+
+    valueAfterUseOperator = Number($result.textContent)
+    actualOperator = operator
+    isFirstTypingAfterUseOperator = true
+    dubleOnCalculate = false
+    nextOnTypingFraction = false
+    blinkNumber()
 }
-//прпр
+
+
 function onPlusButton() {
     operatorHandler(Operator.plus)
 }
@@ -106,37 +101,14 @@ function ifResultMoreThenEleven() {
 
 
 
-function onCalculate() {
+function onCalculate(event=null, isNextOperator=false) {
 
     let result
 
-    if (dubleOnCalculate) {
+    if (dubleOnCalculate && !isNextOperator) {
         valueAfterUseOperator = null
         result = Number($result.textContent)
     }
-    
-    if (actualOperator === Operator.plus) {
-        result = valueAfterUseOperator + Number($result.textContent)
-    } else if (actualOperator === Operator.minus) {
-        result = valueAfterUseOperator - Number($result.textContent)
-    } else if (actualOperator === Operator.multiple) {
-        result = valueAfterUseOperator * Number($result.textContent)
-    } else if (actualOperator === Operator.division) {
-        result = valueAfterUseOperator / Number($result.textContent)
-    }
-
-    $result.textContent = result
-    actualOperator = null
-    nextOperator = false
-    dubleOnCalculate = true
-    isFirstTypingAfterUseOperator = true
-    nextOnTypingFraction = false
-    blinkNumber()
-}
-
-
-function onNextOperatorResult() {
-    let result
 
     if (actualOperator === Operator.plus) {
         result = valueAfterUseOperator + Number($result.textContent)
@@ -150,12 +122,23 @@ function onNextOperatorResult() {
 
     nextOnTypingFraction = false
     $result.textContent = result
+
+    if (!isNextOperator) {
+        actualOperator = null
+        nextOperator = false
+        dubleOnCalculate = true
+        isFirstTypingAfterUseOperator = true
+        blinkNumber()
+    }
 }
 
 
 
-function onTypingNumber(number) { 
-    
+
+
+
+function onTypingNumber(number) {
+
     if (isFirstTypingAfterUseOperator) {
         isFirstTypingAfterUseOperator = false
         $result.textContent = number
@@ -170,19 +153,19 @@ function onTypingNumber(number) {
 
 
 function onTypingFraction() {
-
     if (nextOnTypingFraction) {
         nextOnTypingFraction = false
-        $result.textContent = 'Invalid value'
+        $result.textContent = 'Invalid value' // запретить, убрать нан
         return
     }
+
     $result.textContent += '.'
     nextOnTypingFraction = true
 }
 
 
 
-function onShowReset() { 
+function onShowReset() {
     $result.textContent = '0'
     actualOperator = null
     nextOperator = false
@@ -199,7 +182,7 @@ $multiplyButton.addEventListener('click', onMultiplyButton)
 $divisionButton.addEventListener('click', onDivisionButton)
 
 $resultButtom.addEventListener('click', onCalculate)
-    
+
 // Numbers buttons
 for (let i = 0; i < buttonsArray.length - 1; i++) {
 
